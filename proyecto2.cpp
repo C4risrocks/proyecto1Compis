@@ -31,6 +31,7 @@ main(){
  			//printf("%i\n", j);	
  			//edo0();
    	   	}
+   	   	//printf("%i\n", j);
    	   	edo0();	
 		}
 		fclose(archivo_lectura);
@@ -39,8 +40,8 @@ main(){
 
 void edo0(){
 	i++;
-	FILE * archivo_escritura;
-	printf("i= %i\n", i);
+	//FILE * archivo_escritura;
+	//printf("i= %i\n", i);
 	if( (caracter[i]>=97 && caracter[i]<=122) || (caracter[i]>=65 && caracter[i]<=90) || caracter[i]=='_')
 	{
 		 printf("caracter leido E0 = %c\n", caracter[i]);
@@ -69,8 +70,9 @@ void edo1(){
     	printf("Cadena valida");
     	for(k=0;k<i;k++){
     	fprintf(archivo_escritura, "%c", caracter[k]);	
-    	printf("caracteres %i = %c\n", k,caracter[k]);
+    	//printf("caracteres %i = %c\n", k,caracter[k]);
 		}
+		fprintf(archivo_escritura, " 0");
     	return;
     }
 	else{

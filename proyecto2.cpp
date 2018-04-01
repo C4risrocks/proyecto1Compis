@@ -2,7 +2,7 @@
 #include <string.h>
 
 char nombre[300];
-char caracter;
+char caracter[300];
 int i = -1;
 void edo0(void);
 void edo1(void);
@@ -16,51 +16,64 @@ main(){
 	gets(nombre);
 	
 	archivo_lectura = fopen (nombre, "r");
-	archivo_escritura = fopen ("resultado.txt", "w+");
+//	archivo_escritura = fopen ("resultado.txt", "a");
 	int j=0;
 	if (archivo_lectura == NULL){
 		perror("ERROR");
 	}
 	
 	else{
-		while((caracter = fgetc(archivo_lectura)) != EOF)
+		while((caracter[j] = fgetc(archivo_lectura)) != EOF)
 		{
- 			fprintf(archivo_escritura, "%c", caracter);
- 			printf("%c", caracter);
- 		//	edo0();
-   	   		
+ 			//fprintf(archivo_escritura, "%c", caracter[j]);
+ 			//printf("%c\n", caracter[j]);
+ 			j++;
+ 			//printf("%i\n", j);	
+ 			//edo0();
    	   	}
-   	   		
+   	   	edo0();	
 		}
 		fclose(archivo_lectura);
 	}
 
 
-void edo0(void){
+void edo0(){
 	i++;
-	if( (caracter>=97 && caracter<=122) || (caracter>=65 && caracter<=90) || caracter=='_')
+	FILE * archivo_escritura;
+	printf("i= %i\n", i);
+	if( (caracter[i]>=97 && caracter[i]<=122) || (caracter[i]>=65 && caracter[i]<=90) || caracter[i]=='_')
 	{
-		 printf("%c", caracter);
-    edo1();
+		 printf("caracter leido E0 = %c\n", caracter[i]);
+		 //fprintf(archivo_escritura, "%c", caracter[i]);
+    	edo1();
    
 	}
     else{
-    printf("%c", caracter);
+    printf("%c", caracter[i]);
     }
 }
  
-void edo1(void){
+void edo1(){
+	FILE * archivo_escritura;
+	archivo_escritura = fopen ("resultado.txt", "w+");
+	int k;
+	//char s;
     i++;
-	if( (caracter>=48 && caracter<=57) || (caracter>=97 && caracter<=122) || (caracter>=65 && caracter<=90) || caracter=='_')
+    printf("i= %i\n", i);
+	if( (caracter[i]>=48 && caracter[i]<=57) || (caracter[i]>=97 && caracter[i]<=122) || (caracter[i]>=65 && caracter[i]<=90) || caracter[i]=='_')
 	{
-    edo1();
-     printf("%c", caracter);
+		printf("caracter leido E1= %c\n", caracter[i]);
+   		edo1();     
 	}
-	else if(caracter=='\0'){
-    printf("Cadena valida");
-    return;
+	else if(caracter[i]==' '||caracter[i]=='\n'||caracter[i]=='\t'){
+    	printf("Cadena valida");
+    	for(k=0;k<i;k++){
+    	fprintf(archivo_escritura, "%c", caracter[k]);	
+    	printf("caracteres %i = %c\n", k,caracter[k]);
+		}
+    	return;
     }
 	else{
-    printf("No valida");
+		printf("i= %i, caracter leido No Valido en E1= %c\n", caracter[i]);
 	}	       
 }

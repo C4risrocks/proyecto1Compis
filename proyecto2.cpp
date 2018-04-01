@@ -74,7 +74,7 @@ void edo1(){
     	printf("Cadena valida");
     	for(k=0;k<i;k++){
     	fprintf(archivo_escritura, "%c", caracter[k]);	
-    		if(caracter[k+1]==' '||caracter[k+1]=='\n'||caracter[k+1]=='\t'){
+    		if(caracter[k+1]==' '||caracter[k+1]=='\n'||caracter[k+1]=='\t'||caracter[k+1]== EOF){
     			fprintf(archivo_escritura, " 1");
 			}
     	//printf("caracteres %i = %c\n", k,caracter[k]);

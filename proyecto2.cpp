@@ -8,34 +8,35 @@ int j=0;
 void edo0(void); //estado inicial
 void edo1(void); //estado final identificadores
 void edo2(void); //estado final constantes
+//void edo3(void); //estado final constantes
 FILE * archivo_escritura;
 
 	int k;
 
 main(){
-	
+
 	FILE * archivo_lectura;
 	FILE * archivo_escritura;
-	
-	printf("Escribe el nombre del archivo: ");
-	gets(nombre);
-	
-	archivo_lectura = fopen (nombre, "r");
-//	archivo_escritura = fopen ("resultado.txt", "a");
-	
+
+	//printf("Escribe el nombre del archivo: ");
+	//gets(nombre);
+
+	archivo_lectura = fopen ("entrada.txt", "r");
+	archivo_escritura = fopen ("resultado.txt", "w");
+
 	if (archivo_lectura == NULL){
 		perror("ERROR");
 	}
-	
+
 	else{
 		while((caracter[j] = fgetc(archivo_lectura)) != EOF)
 		{
  			j++;
- 			//printf("%i\n", j);	
+ 			//printf("%i\n", j);
  			//edo0();
    	   	}
    	   	//printf("%i\n", j);
-   	   	edo0();	
+   	   	edo0();
 		}
 		fclose(archivo_lectura);
 	}
@@ -46,14 +47,14 @@ void edo0(){
 	i++;
 	printf("j= %i\n", j);
 	if(i<j){
-	
+
 		if( (caracter[i]>=97 && caracter[i]<=122) || (caracter[i]>=65 && caracter[i]<=90) || caracter[i]=='_')
 		{
-		fprintf(archivo_escritura, "%c", caracter[i]);	
+		fprintf(archivo_escritura, "%c", caracter[i]);
 		 printf("caracter leido E0 = %c\n", caracter[i]);
-		 
+
     	edo1();
-   
+
 		}
 		else if(caracter[i]>=48 && caracter[i]<=57){
 			 printf("caracter leido E0 = %c\n", caracter[i]);
@@ -64,11 +65,11 @@ void edo0(){
     	printf("i= %i, caracter leido No Valido en E0= %c\n", caracter[i]);
     	}
 		}
-   
+
 }
- 
+
 void edo1(){
-	
+
 	archivo_escritura = fopen ("resultado.txt", "a");
     i++;
     printf("i= %i\n", i);
@@ -76,7 +77,7 @@ void edo1(){
 	{
 		printf("caracter leido E1= %c\n", caracter[i]);
 		 fprintf(archivo_escritura, "%c", caracter[i]);
-   		edo1();     
+   		edo1();
 	}
 	else if(caracter[i]==' '||caracter[i]=='\n'||caracter[i]=='\t'||caracter[i]== EOF){
     	printf("Cadena valida");
@@ -87,8 +88,8 @@ void edo1(){
     }
 	else{
 		printf("i= %i, caracter leido No Valido en E1= %c\n", caracter[i]);
-	}	     
-	return;  
+	}
+	return;
 }
 
 void edo2(){
@@ -99,7 +100,7 @@ void edo2(){
 			 fprintf(archivo_escritura, "%c", caracter[i]);
     		edo2();
 		}
-		
+
 		else if(caracter[i]==' '||caracter[i]=='\n'||caracter[i]=='\t'||caracter[i]== EOF){
     	printf("Cadena valida");
     			fprintf(archivo_escritura, " 6\n");
@@ -107,8 +108,9 @@ void edo2(){
     		//return;
 			}
 		//fprintf(archivo_escritura, " 1\n");
-		
+
     else{
 		printf("i= %i, caracter leido No Valido en E2= %c\n", caracter[i]);
-	}	
+	}
 }
+

@@ -61,7 +61,7 @@ void edo0(){
 			fprintf(archivo_escritura, "%c", caracter[i]);
     		edo2();
 		}
-		else if(caracter[i]>=33 && caracter[i]<=47){
+		else if(caracter[i]== '('|| caracter[i]== ')'|| caracter[i]== ','|| caracter[i]== '.'|| caracter[i]== '{'|| caracter[i]== '}'|| caracter[i]== '['|| caracter[i]== ']'){
 			 printf("caracter leido E0 = %c\n", caracter[i]);
 			fprintf(archivo_escritura, "%c", caracter[i]);
     		edo3();
@@ -90,6 +90,12 @@ void edo1(){
     	//printf("caracteres %i = %c\n", k,caracter[k]);
 		//fprintf(archivo_escritura, " 1\n");
 		edo0();
+    }else if(caracter[i]== '('|| caracter[i]== ')'|| caracter[i]== ','|| caracter[i]== '.'|| caracter[i]== '{'|| caracter[i]== '}'|| caracter[i]== '['|| caracter[i]== ']'){
+    	printf("Cadena valida");
+    			fprintf(archivo_escritura, " 1\n");
+    	printf("caracter leido E1 = %c\n", caracter[i]);
+			 fprintf(archivo_escritura, "%c", caracter[i]);
+		edo3();
     }
 	else{
 		printf("i= %i, caracter leido No Valido en E1= %c\n", caracter[i]);
@@ -111,7 +117,13 @@ void edo2(){
     			fprintf(archivo_escritura, " 6\n");
     			edo0();
     		//return;
-			}
+			}else if(caracter[i]== '('|| caracter[i]== ')'|| caracter[i]== ','|| caracter[i]== '.'|| caracter[i]== '{'|| caracter[i]== '}'|| caracter[i]== '['|| caracter[i]== ']'){
+    	printf("Cadena valida");
+    			fprintf(archivo_escritura, " 6\n");
+    	printf("caracter leido E2 = %c\n", caracter[i]);
+			 fprintf(archivo_escritura, "%c", caracter[i]);
+		edo3();
+    }
 		//fprintf(archivo_escritura, " 1\n");
 
     else{
@@ -122,7 +134,7 @@ void edo2(){
 void edo3(){
 	i++;
 	archivo_escritura = fopen ("resultado.txt", "a");
-		if(caracter[i]>=33 && caracter[i]<=47){
+		if(caracter[i]== '('|| caracter[i]== ')'|| caracter[i]== ','|| caracter[i]== '.'|| caracter[i]== '{'|| caracter[i]== '}'|| caracter[i]== '['|| caracter[i]== ']'){
 			 printf("caracter leido E2 = %c\n", caracter[i]);
 			 fprintf(archivo_escritura, "%c", caracter[i]);
     		edo3();
@@ -134,9 +146,8 @@ void edo3(){
     			edo0();
     		//return;
 			}
-		//fprintf(archivo_escritura, " 1\n");
 
-    else{
+else{
 		printf("i= %i, caracter leido No Valido en E2= %c\n", caracter[i]);
 	}
 }

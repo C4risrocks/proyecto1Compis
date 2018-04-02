@@ -12,12 +12,15 @@ void edo2(void); //estado final constantes
 char lectura (char);
 FILE * archivo_escritura;
 char s[100]; //guarda la palabra completa antes de insertarla
-char *s2[100];
-int k;
+char *apt[100]; //guarda las palabras insertadas en el archivo
+int k=-1;
 int v;
-int w;	
+int w =0;	
 int encontro = 0;
 int res;
+int p;
+char cad[100];
+
 
 main(){
 	
@@ -37,14 +40,9 @@ main(){
 	else{
 		while((caracter[j] = fgetc(archivo_lectura)) != EOF)
 		{
- 			//s = puts(caracter);
- 			//printf("%s", s);
 			j++;
- 			
    	   	}
    	   	
-   	   	//printf("%s", s);
-   	   
    	   	edo0();	
 		}
 		fclose(archivo_lectura);
@@ -54,13 +52,15 @@ main(){
 void edo0(){
 	archivo_escritura = fopen ("resultado.txt", "a");
 	i++;
+	k++;
+	//	printf("cadena s2: %s contador s2: %i\n",apt[0],8);	
 	printf("j= %i\n", j);
 	if(i<j){
 	
 		if( (caracter[i]>=97 && caracter[i]<=122) || (caracter[i]>=65 && caracter[i]<=90) || caracter[i]=='_')
 		{
 		//fprintf(archivo_escritura, "%c", caracter[i]);	
-		s[i] = caracter[i];
+		s[k] = caracter[i];
 		 printf("caracter leido E0 = %c\n", caracter[i]);
 		 
     	edo1();
@@ -68,7 +68,8 @@ void edo0(){
 		}
 		else if(caracter[i]>=48 && caracter[i]<=57){
 			 printf("caracter leido E0 = %c\n", caracter[i]);
-			fprintf(archivo_escritura, "%c", caracter[i]);
+			//fprintf(archivo_escritura, "%c", caracter[i]);
+				s[k] = (char)caracter[i];
     		edo2();
 		}
 		 else{
@@ -82,59 +83,100 @@ void edo1(){
 	
 	archivo_escritura = fopen ("resultado.txt", "a");
     i++;
+    k++;
     printf("i= %i\n", i);
 	if( (caracter[i]>=48 && caracter[i]<=57) || (caracter[i]>=97 && caracter[i]<=122) || (caracter[i]>=65 && caracter[i]<=90) || caracter[i]=='_')
 	{
 		printf("caracter leido E1= %c\n", caracter[i]);
-		s[i] = caracter[i];
+		s[k] = caracter[i];
 		 //fprintf(archivo_escritura, "%c", caracter[i]);
    		edo1();     
 	}
 	else if(caracter[i]==' '||caracter[i]=='\n'||caracter[i]=='\t'||caracter[i]== EOF){
-    	printf("Cadena valida: %s", s);
-    	for (v=0; v<=100; v++){
-    		res = strcmp(s2[v], s);
-    		printf("%i\n",v);
-    	if (res == 1)
-		{
- 			printf ("iguales\n");
- 			v=100;
- 			encontro = 1;
-		}
+    	printf("Cadena valida: %s\n", s);
+        
+    	for (v=0; v<w; v++){
+    		printf("contador v %i\n",v);
+    		printf("contador w %i\n",w);
+    		printf("cadena s2: %s contador s2: %i\n",apt[v],v);	
     		
+    		res = strcmp(apt[v], s);
+    		printf("resultado comparacion: %i\n", res);
+	    	if (res == 0)
+			{
+	 			printf ("iguales\n");
+	 			encontro = 1;
+			}
     	}
 		if(encontro != 1)
 		{
-		
-		 s2[w] = s;
-    		fprintf(archivo_escritura, "%s 1", s);
+			printf("ENTRE\n");
+			strcpy(cad,s);
+		 	apt[w] = cad;
+		 		//printf("cadena s2: %s contador s2: %i\n",apt[w],w);	
+    		fprintf(archivo_escritura, "%s 1\n", s);
     		w++;
-    		encontro = 0;
+    		
     	}
-    			//fprintf(archivo_escritura, " 1\n");
-    			
-    	//printf("caracteres %i = %c\n", k,caracter[k]);
-		//fprintf(archivo_escritura, " 1\n");
+    	//printf("cadena APT: %s contador s2: %i\n",apt[w-1],w-1);	
+    	for(p=0;p<k;p++){
+    			s[p]=NULL;
+			}
+			k=-1;
+    		encontro = 0;	
+		//printf("cadena APT2: %s contador s2: %i\n",apt[w-1],w-1);
 		edo0();
     }
 	else{
 		printf("i= %i, caracter leido No Valido en E1= %c\n", caracter[i]);
-	}	     
-	return;  
+	}	     	
 }
 
 void edo2(){
 	i++;
+	k++;
 	archivo_escritura = fopen ("resultado.txt", "a");
 		if(caracter[i]>=48 && caracter[i]<=57){
 			 printf("caracter leido E2 = %c\n", caracter[i]);
-			 fprintf(archivo_escritura, "%c", caracter[i]);
+			 s[k] = (char)caracter[i];
+			 //fprintf(archivo_escritura, "%c", caracter[i]);
     		edo2();
 		}
 		
 		else if(caracter[i]==' '||caracter[i]=='\n'||caracter[i]=='\t'||caracter[i]== EOF){
-    	printf("Cadena valida");
-    			fprintf(archivo_escritura, " 6\n");
+    	printf("Cadena valida: %s\n", s);
+    			//fprintf(archivo_escritura, " 6\n");
+    			/////////////
+    			for (v=0; v<w; v++){
+    		printf("contador v %i\n",v);
+    		printf("contador w %i\n",w);
+    		printf("cadena s2: %s contador s2: %i\n",apt[v],v);	
+    		
+    		res = strcmp(apt[v], s);
+    		printf("resultado comparacion: %i\n", res);
+	    	if (res == 0)
+			{
+	 			printf ("iguales\n");
+	 			encontro = 1;
+			}
+    	}
+		if(encontro != 1)
+		{
+			printf("ENTRE\n");
+			strcpy(cad,s);
+		 	apt[w] = cad;
+		 	//	printf("cadena s2: %s contador s2: %i\n",apt[w],w);	
+    		fprintf(archivo_escritura, "%s 6\n", s);
+    		w++;	
+    	}
+    	//printf("cadena APT: %s contador s2: %i\n",apt[w-1],w-1);	
+    	for(p=0;p<k;p++){
+    			s[p]=NULL;
+			}
+			k=-1;
+    		encontro = 0;	
+	//	printf("cadena APT2: %s contador s2: %i\n",apt[w-1],w-1);
+    			////////////
     			edo0();
     		//return;
 			}

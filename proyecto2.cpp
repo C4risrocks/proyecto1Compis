@@ -8,7 +8,7 @@ int j=0;
 void edo0(void); //estado inicial
 void edo1(void); //estado final identificadores
 void edo2(void); //estado final constantes
-//void edo3(void); //estado final constantes
+void edo3(void); //estado final simbolos especiales
 FILE * archivo_escritura;
 
 	int k;
@@ -61,6 +61,11 @@ void edo0(){
 			fprintf(archivo_escritura, "%c", caracter[i]);
     		edo2();
 		}
+		else if(caracter[i]>=33 && caracter[i]<=47){
+			 printf("caracter leido E0 = %c\n", caracter[i]);
+			fprintf(archivo_escritura, "%c", caracter[i]);
+    		edo3();
+		}
 		 else{
     	printf("i= %i, caracter leido No Valido en E0= %c\n", caracter[i]);
     	}
@@ -104,6 +109,28 @@ void edo2(){
 		else if(caracter[i]==' '||caracter[i]=='\n'||caracter[i]=='\t'||caracter[i]== EOF){
     	printf("Cadena valida");
     			fprintf(archivo_escritura, " 6\n");
+    			edo0();
+    		//return;
+			}
+		//fprintf(archivo_escritura, " 1\n");
+
+    else{
+		printf("i= %i, caracter leido No Valido en E2= %c\n", caracter[i]);
+	}
+}
+
+void edo3(){
+	i++;
+	archivo_escritura = fopen ("resultado.txt", "a");
+		if(caracter[i]>=33 && caracter[i]<=47){
+			 printf("caracter leido E2 = %c\n", caracter[i]);
+			 fprintf(archivo_escritura, "%c", caracter[i]);
+    		edo3();
+		}
+
+		else if(caracter[i]==' '||caracter[i]=='\n'||caracter[i]=='\t'||caracter[i]== EOF){
+    	printf("Cadena valida");
+    			fprintf(archivo_escritura, " 2\n");
     			edo0();
     		//return;
 			}

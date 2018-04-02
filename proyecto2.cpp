@@ -9,6 +9,8 @@ void edo0(void); //estado inicial
 void edo1(void); //estado final identificadores
 void edo2(void); //estado final constantes
 void edo3(void); //estado final simbolos especiales
+void edo4(void); //estado inicial cadenas
+void edo5(void); // estado final cadenas
 FILE * archivo_escritura;
 
 	int k;
@@ -65,6 +67,10 @@ void edo0(){
 			 printf("caracter leido E0 = %c\n", caracter[i]);
 			fprintf(archivo_escritura, "%c", caracter[i]);
     		edo3();
+		}else if(caracter[i]== '"'){
+			 printf("caracter leido E0 = %c\n", caracter[i]);
+			fprintf(archivo_escritura, "%c", caracter[i]);
+    		edo4();
 		}
 		 else{
     	printf("i= %i, caracter leido No Valido en E0= %c\n", caracter[i]);
@@ -135,7 +141,7 @@ void edo3(){
 	i++;
 	archivo_escritura = fopen ("resultado.txt", "a");
 		if(caracter[i]== '('|| caracter[i]== ')'|| caracter[i]== ','|| caracter[i]== '.'|| caracter[i]== '{'|| caracter[i]== '}'|| caracter[i]== '['|| caracter[i]== ']'){
-			 printf("caracter leido E2 = %c\n", caracter[i]);
+			 printf("caracter leido E3 = %c\n", caracter[i]);
 			 fprintf(archivo_escritura, "%c", caracter[i]);
     		edo3();
 		}
@@ -151,4 +157,40 @@ else{
 		printf("i= %i, caracter leido No Valido en E2= %c\n", caracter[i]);
 	}
 }
+
+void edo4(){
+	i++;
+	archivo_escritura = fopen ("resultado.txt", "a");
+		if(caracter[i]== '"'){
+			 printf("Cadena valida");
+			 printf("caracter leido E4 = %c\n", caracter[i]);
+			 fprintf(archivo_escritura, "%c", caracter[i]);
+    			fprintf(archivo_escritura, " 7\n");
+    			edo5();
+		}
+
+		else if((caracter[i]>=48 && caracter[i]<=57) || (caracter[i]>=97 && caracter[i]<=122) || (caracter[i]>=65 && caracter[i]<=90) || caracter[i]=='_' || caracter[i]==' '||caracter[i]=='\n'||caracter[i]=='\t'){
+    	printf("Cadena valida");
+    			printf("caracter leido E4 = %c\n", caracter[i]);
+			 fprintf(archivo_escritura, "%c", caracter[i]);
+    			edo4();
+    		//return;
+			}
+else{
+		printf("i= %i, caracter leido No Valido en E2= %c\n", caracter[i]);
+	}
+}
+
+void edo5(){
+	i++;
+		if(caracter[i]==' '||caracter[i]=='\n'||caracter[i]=='\t'||caracter[i]== EOF){
+    	printf("Estado final cadenas");
+		edo0();}
+else{
+		printf("i= %i, caracter leido No Valido en E2= %c\n", caracter[i]);
+	}
+}
+
+
+
 

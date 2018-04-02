@@ -1,7 +1,8 @@
+"hola como estas"
 1, 2, 3, 4,
 int main ( int, argc, char argv )
 {
-FILE *fp;
+	FILE *fp;
 
  	char cadena[] = "Mostrando el uso de fputs en un fichero.\n";
 

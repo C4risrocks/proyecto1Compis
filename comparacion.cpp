@@ -12,8 +12,8 @@ void edo3(void); //estado final simbolos especiales
 void edo4(void); //estado inicial cadenas
 void edo5(void); // estado final cadenas
 void edo6(void);//estado final operadores
-void edo7(void);//estado final símbolos de asignación
-void edo8(void);//estado final símbolos de comparación
+void edo7(void);//estado final sÃ­mbolos de asignaciÃ³n
+void edo8(void);//estado final sÃ­mbolos de comparaciÃ³n
 FILE * archivo_escritura;
 
 	int k;
@@ -103,6 +103,7 @@ void edo1(){
 	{
 		printf("caracter leido E1= %c\n", caracter[i]);
 		 fprintf(archivo_escritura, "%c", caracter[i]);
+		 
    		edo1();
 	}
 	else if(caracter[i]==' '||caracter[i]=='\n'||caracter[i]=='\t'||caracter[i]== EOF){
@@ -112,16 +113,30 @@ void edo1(){
 		//fprintf(archivo_escritura, " 1\n");
 		edo0();
     }else if(caracter[i]== '('|| caracter[i]== ')'|| caracter[i]== ','|| caracter[i]== '.'|| caracter[i]== '{'|| caracter[i]== '}'|| caracter[i]== '['|| caracter[i]== ']'){
+    
     	printf("Cadena valida");
-    			fprintf(archivo_escritura, " 1\n");
-    	printf("caracter leido E1 = %c\n", caracter[i]);
-			 fprintf(archivo_escritura, "%c", caracter[i]);
+    				fprintf(archivo_escritura, " 1\n");
 		edo3();
+	}else if(caracter[i]== '+'|| caracter[i]== '-'|| caracter[i]== '/'|| caracter[i]== '*'){
+	
+			printf("Cadena valida");
+    				fprintf(archivo_escritura, " 1\n");
+    		edo6();
+    }else if(caracter[i]== '='){
+    	
+		printf("Cadena valida");
+    			fprintf(archivo_escritura, " 1\n");
+    		edo7();
+    }else if(caracter[i]== '<'|| caracter[i]== '>'){
+    
+			 printf("Cadena valida");
+    			fprintf(archivo_escritura, " 1\n");
+    		edo8();
     }
 	else{
 		printf("i= %i, caracter leido No Valido en E1= %c\n", caracter[i]);
 	}
-	return;
+//	return;
 }
 
 void edo2(){
@@ -135,16 +150,50 @@ void edo2(){
 
 		else if(caracter[i]==' '||caracter[i]=='\n'||caracter[i]=='\t'||caracter[i]== EOF){
     	printf("Cadena valida");
-    			fprintf(archivo_escritura, " 6\n");
+    			fprintf(archivo_escritura, " 2\n");
     			edo0();
+    	}else if( (caracter[i]>=97 && caracter[i]<=122) || (caracter[i]>=65 && caracter[i]<=90) || caracter[i]=='_'){
+		
+				
+			("Cadena valida");
+    			fprintf(archivo_escritura, " 2\n");
+				edo1();
     		//return;
-			}else if(caracter[i]== '('|| caracter[i]== ')'|| caracter[i]== ','|| caracter[i]== '.'|| caracter[i]== '{'|| caracter[i]== '}'|| caracter[i]== '['|| caracter[i]== ']'){
+    	}
+    		
+    		
+			
+		else if(caracter[i]== '('|| caracter[i]== ')'|| caracter[i]== ','|| caracter[i]== '.'|| caracter[i]== '{'|| caracter[i]== '}'|| caracter[i]== '['|| caracter[i]== ']'){
+    
     	printf("Cadena valida");
-    			fprintf(archivo_escritura, " 6\n");
-    	printf("caracter leido E2 = %c\n", caracter[i]);
-			 fprintf(archivo_escritura, "%c", caracter[i]);
+    				fprintf(archivo_escritura, " 2\n");
 		edo3();
-    }
+    
+    
+    	}else if(caracter[i]== '"'){
+    	
+			 printf("Cadena valida");
+    				fprintf(archivo_escritura, " 2\n");
+    		edo4();
+    		
+    	}else if(caracter[i]== '+'|| caracter[i]== '-'|| caracter[i]== '/'|| caracter[i]== '*'){
+    		
+			 printf("Cadena valida");
+    				fprintf(archivo_escritura, " 2\n");
+    		edo6();
+    		
+    	}else if(caracter[i]== '='){
+    	
+		printf("Cadena valida");
+    				fprintf(archivo_escritura, " 2\n");
+    		edo7();
+    		
+    	}else if(caracter[i]== '<'|| caracter[i]== '>'){
+    		
+			 printf("Cadena valida");
+    				fprintf(archivo_escritura, " 2\n");
+    		edo8();
+		}
 		//fprintf(archivo_escritura, " 1\n");
 
     else{
@@ -163,11 +212,49 @@ void edo3(){
 
 		else if(caracter[i]==' '||caracter[i]=='\n'||caracter[i]=='\t'||caracter[i]== EOF){
     	printf("Cadena valida");
-    			fprintf(archivo_escritura, " 2\n");
+    			fprintf(archivo_escritura, " simbolo especial\n");
     			edo0();
     		//return;
 			}
-
+			
+		else if( (caracter[i]>=97 && caracter[i]<=122) || (caracter[i]>=65 && caracter[i]<=90) || caracter[i]=='_'){
+			
+				printf("Cadena valida");
+    			fprintf(archivo_escritura, " simbolo especial\n");
+				
+				edo1();
+    		//return;
+    	}
+		else if(caracter[i]>=48 && caracter[i]<=57){
+			
+			printf("Cadena valida");
+    				fprintf(archivo_escritura, " simbolo especial\n");
+    		edo2();
+		}
+		
+		else if(caracter[i]== '"'){
+		
+			 printf("Cadena valida");
+    				fprintf(archivo_escritura, " simbolo especial\n");
+    		edo4();
+    	}else if(caracter[i]== '+'|| caracter[i]== '-'|| caracter[i]== '/'|| caracter[i]== '*'){
+    		
+			 printf("Cadena valida");
+    			fprintf(archivo_escritura, " simbolo especial\n");
+    		edo6();
+    	}else if(caracter[i]== '='){
+    		
+			 printf("Cadena valida");
+    			fprintf(archivo_escritura, " simbolo especial\n");
+    		edo7();
+    	}else if(caracter[i]== '<'|| caracter[i]== '>'){
+    		
+			 printf("Cadena valida");
+    				fprintf(archivo_escritura, " simbolo especial\n");
+    		edo8();
+		}
+		
+		
 else{
 		printf("i= %i, caracter leido No Valido en E2= %c\n", caracter[i]);
 	}
@@ -180,7 +267,7 @@ void edo4(){
 			 printf("Cadena valida");
 			 printf("caracter leido E4 = %c\n", caracter[i]);
 			 fprintf(archivo_escritura, "%c", caracter[i]);
-    			fprintf(archivo_escritura, " 7\n");
+    			fprintf(archivo_escritura, "cadena\n");
     			edo5();
 		}
 
@@ -191,6 +278,52 @@ void edo4(){
     			edo4();
     		//return;
 			}
+		else if(caracter[i]==' '||caracter[i]=='\n'||caracter[i]=='\t'||caracter[i]== EOF){
+    	printf("Cadena valida");
+    			fprintf(archivo_escritura, " cadena\n");
+    			edo0();
+    		//return;
+			}
+			
+		else if( (caracter[i]>=97 && caracter[i]<=122) || (caracter[i]>=65 && caracter[i]<=90) || caracter[i]=='_'){
+			
+				printf("Cadena valida");
+    			fprintf(archivo_escritura, " cadena\n");
+				
+				edo1();
+    		//return;
+    	}
+		else if(caracter[i]>=48 && caracter[i]<=57){
+			
+			printf("Cadena valida");
+    		fprintf(archivo_escritura, " cadena\n");
+    		edo2();
+		}
+			
+		else if(caracter[i]== '('|| caracter[i]== ')'|| caracter[i]== ','|| caracter[i]== '.'|| caracter[i]== '{'|| caracter[i]== '}'|| caracter[i]== '['|| caracter[i]== ']'){
+    
+    	printf("Cadena valida");
+    	fprintf(archivo_escritura, " cadena\n");
+		edo3();
+		
+		}else if(caracter[i]== '+'|| caracter[i]== '-'|| caracter[i]== '/'|| caracter[i]== '*'){
+    		
+			 printf("Cadena valida");
+    	    	fprintf(archivo_escritura, " cadena\n");
+    		edo6();
+    	}else if(caracter[i]== '='){
+    		
+			printf("Cadena valida");
+    		fprintf(archivo_escritura, " simbolo especial\n");
+    		edo7();
+    	}else if(caracter[i]== '<'|| caracter[i]== '>'){
+    		
+			 printf("Cadena valida");
+    		fprintf(archivo_escritura, " cadena\n");
+    		edo8();
+		}
+			
+			
 else{
 		printf("i= %i, caracter leido No Valido en E2= %c\n", caracter[i]);
 	}
@@ -217,9 +350,54 @@ void edo6(){
     	printf("Cadena valida");
     			fprintf(archivo_escritura, " Operador\n");
     			edo0();
+    		
+    		}else if( (caracter[i]>=97 && caracter[i]<=122) || (caracter[i]>=65 && caracter[i]<=90) || caracter[i]=='_'){
+		
+				printf("Cadena valida");
+    			fprintf(archivo_escritura, " Operador\n");
+				edo1();
+    		//return;
+    	}
+		else if(caracter[i]>=48 && caracter[i]<=57){
+		
+			 printf("Cadena valida");
+    		fprintf(archivo_escritura, " Operador\n");
+    		edo2();
+		}
+		else if(caracter[i]== '('|| caracter[i]== ')'|| caracter[i]== ','|| caracter[i]== '.'|| caracter[i]== '{'|| caracter[i]== '}'|| caracter[i]== '['|| caracter[i]== ']'){
+    		
+    		printf("Cadena valida");
+    			fprintf(archivo_escritura, " Operador\n");
+			edo3();
+		}
+		
+		else if(caracter[i]== '"'){
+		
+			 printf("Cadena valida");
+    			fprintf(archivo_escritura, " Operador\n");
+    		edo4();
+    		
+    	}else if(caracter[i]== '='){
+    		
+			 printf("Cadena valida");
+    			fprintf(archivo_escritura, " Operador\n");
+    		edo7();
+    	}else if(caracter[i]== '<'|| caracter[i]== '>'){
+    	
+			 printf("Cadena valida");
+    			fprintf(archivo_escritura, " Operador\n");
+    		edo8();
+		}
+    	else{
+			printf("i= %i, caracter leido No Valido en E6= %c\n", caracter[i]);
+    		
     		//return;
 			}
 }
+			
+			
+			
+
 void edo7(){
 		i++;
 	archivo_escritura = fopen ("resultado.txt", "a");
@@ -234,13 +412,53 @@ void edo7(){
     			edo0();
     		//return;
 			}
+		else if( (caracter[i]>=97 && caracter[i]<=122) || (caracter[i]>=65 && caracter[i]<=90) || caracter[i]=='_'){
+			
+				printf("Cadena valida");
+    		fprintf(archivo_escritura, " Simbolo de asignacion\n");
+				edo1();
+    		//return;
+    	}
+		else if(caracter[i]>=48 && caracter[i]<=57){
+			
+			 printf("Cadena valida");
+    			fprintf(archivo_escritura, " Simbolo de asignacion\n");
+    		edo2();
+		}
+		else if(caracter[i]== '('|| caracter[i]== ')'|| caracter[i]== ','|| caracter[i]== '.'|| caracter[i]== '{'|| caracter[i]== '}'|| caracter[i]== '['|| caracter[i]== ']'){
+    
+    	printf("Cadena valida");
+    			fprintf(archivo_escritura, " Simbolo de asignacion\n");
+		edo3();
+	}
+		else if(caracter[i]== '"'){
+		
+			 printf("Cadena valida");
+    			fprintf(archivo_escritura, " Simbolo de asignacion\n");
+    		edo4();
+    	}else if(caracter[i]== '+'|| caracter[i]== '-'|| caracter[i]== '/'|| caracter[i]== '*'){
+    		
+			printf("Cadena valida");
+    		fprintf(archivo_escritura, " Simbolo de asignacion\n");
+    		edo6();
+    		}else if(caracter[i]== '<'|| caracter[i]== '>'){
+    		
+			 printf("Cadena valida");
+    			fprintf(archivo_escritura, " Simbolo de asignacion\n");
+    		edo8();
+		}
+    	else{
+			printf("i= %i, caracter leido No Valido en E7= %c\n", caracter[i]);
+    		
+    		//return;
+			}
 	}
 void edo8(){
 		i++;
 	archivo_escritura = fopen ("resultado.txt", "a");
 		if(caracter[i]=='<'|| caracter[i]== '>' ){
 		
-			 printf("caracter leido E7 = %c\n", caracter[i]);
+			 printf("caracter leido E8 = %c\n", caracter[i]);
 			 fprintf(archivo_escritura, "%c", caracter[i]);
     		edo8();}
     		else if(caracter[i]==' '||caracter[i]=='\n'||caracter[i]=='\t'||caracter[i]== EOF){
@@ -249,13 +467,43 @@ void edo8(){
     			edo0();
     		//return;
 			}
+				else if( (caracter[i]>=97 && caracter[i]<=122) || (caracter[i]>=65 && caracter[i]<=90) || caracter[i]=='_'){
+			
+				printf("Cadena valida");
+    			fprintf(archivo_escritura, " Simbolo de Comparacion\n");
+				edo1();
+    		//return;
+    	}
+		else if(caracter[i]>=48 && caracter[i]<=57){
+			
+			 printf("Cadena valida");
+    			fprintf(archivo_escritura, " Simbolo de Comparacion\n");
+    		edo2();
+		}
+		else if(caracter[i]== '('|| caracter[i]== ')'|| caracter[i]== ','|| caracter[i]== '.'|| caracter[i]== '{'|| caracter[i]== '}'|| caracter[i]== '['|| caracter[i]== ']'){
+    		
+    		printf("Cadena valida");
+    			fprintf(archivo_escritura, " Simbolo de Comparacion\n");
+		edo3();
+	}
+		else if(caracter[i]== '"'){
+		
+			printf("Cadena valida");
+    			fprintf(archivo_escritura, " Simbolo de Comparacion\n");
+    		edo4();
+    	}else if(caracter[i]== '+'|| caracter[i]== '-'|| caracter[i]== '/'|| caracter[i]== '*'){
+    	
+			printf("Cadena valida");
+    			fprintf(archivo_escritura, " Simbolo de Comparacion\n");
+    		edo6();
+		}else if(caracter[i]== '='){
+			
+			printf("Cadena valida");
+    			fprintf(archivo_escritura, " Simbolo de Comparacion\n");
+    		edo7();
+    	}
 
-else{
-		printf("i= %i, caracter leido No Valido en E2= %c\n", caracter[i]);
+	else{
+		printf("i= %i, caracter leido No Valido en E8= %c\n", caracter[i]);
 	}
 }
-    		
-	
-	
-	
-
